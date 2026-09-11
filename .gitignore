@@ -1,0 +1,11 @@
+# Python virtual environment
+venv/
+
+# Debug/intermediate images
+debug_*.png
+mask.png
+hijab_mask.png
+hijab_color_mask.png
+
+# VS Code local settings
+.vscode/

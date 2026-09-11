@@ -1,0 +1,16 @@
+# Secrets
+.env
+.env.*
+
+
+# Local database and uploaded files
+db.sqlite3
+media/
+
+# Python temporary files
+__pycache__/
+*.py[cod]
+*.log
+
+# Django deployment output
+staticfiles/
