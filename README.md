@@ -28,15 +28,16 @@ Hijab Match was created by a woman who struggled with buying hijabs online-- man
 
 ### Form
 
-![Form](./screenshots/form.gif)
+![Form](https://raw.githubusercontent.com/Nabilah88/HijabMatch/master/frontend/src/assets/screenshots/form.gif)
 
 ### Upload Photo
 
-![Form](./screenshots/upload_photo.gif)
+![Upload Photo](https://raw.githubusercontent.com/Nabilah88/HijabMatch/master/frontend/src/assets/screenshots/upload_photo.gif)
 
 ### Hijab Color Recommendations
 
-![Color Recommendations](./screenshots/color_suggestions.gif)
+![Color Recommendations](https://raw.githubusercontent.com/Nabilah88/HijabMatch/master/frontend/src/assets/screenshots/color_suggestions.gif)
+
 
 ### Hijab Recoloring Preview
 
