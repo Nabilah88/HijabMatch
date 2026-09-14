@@ -41,7 +41,8 @@ Hijab Match was created by a woman who struggled with buying hijabs online-- man
 
 ### Hijab Recoloring Preview
 
-![Hijab Recoloring](./screenshots/hijab_recoloring.gif)
+![Hijab Recoloring](https://raw.githubusercontent.com/Nabilah88/HijabMatch/master/frontend/src/assets/screenshots/hijab_recoloring.gif)
+
 
 ## Technologies used
 
