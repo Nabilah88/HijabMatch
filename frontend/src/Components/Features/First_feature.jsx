@@ -75,7 +75,7 @@ const ResultsCard = () => (
   </Box>
 );
 
-// ─── HERO SECTION 3 ───────────────────────────────────────────────────────────
+
 
 const First_feature = () => {
  

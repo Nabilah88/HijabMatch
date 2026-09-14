@@ -21,21 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
+DEBUG = config("DEBUG", cast=bool)
 SECRET_KEY = config("DJANGO_SECRET_KEY")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
+CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", cast=Csv())
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", cast=Csv())
 
-DEBUG = config("DEBUG", default=True, cast=bool)
-
-ALLOWED_HOSTS = config(
-    "ALLOWED_HOSTS",
-    default="localhost,127.0.0.1",
-    cast=Csv(),
-)
-
-CORS_ALLOWED_ORIGINS = config(
-    "CORS_ALLOWED_ORIGINS",
-    default="http://localhost:5173",
-    cast=Csv(),
-)
 
 
 INSTALLED_APPS = [

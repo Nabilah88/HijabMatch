@@ -12,5 +12,9 @@ __pycache__/
 *.py[cod]
 *.log
 
+
 # Django deployment output
 staticfiles/
+
+# Ignore ONLY the unused model (if it exists)
+selfie_segmenter.tflite

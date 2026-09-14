@@ -64,7 +64,7 @@ const Contact = () => {
           <Box gap="medium" margin={{ top: "medium" }}>
             <Box direction="row" align="center" gap="small">
               <MailOption color="brand" />
-              <Text size="medium">HijabMatch@gmail.com</Text>
+              <Text size="medium">HijabMatch2026@gmail.com</Text>
             </Box>
 
             <Box direction="row" align="center" gap="small">
