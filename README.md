@@ -32,17 +32,27 @@ Hijab Match was created by a woman who struggled with buying hijabs online-- man
 
 ### Upload Photo
 
+<<<<<<< HEAD
 ![Upload Photo](https://raw.githubusercontent.com/Nabilah88/HijabMatch/master/frontend/src/assets/screenshots/upload_photo.gif)
+=======
+![Upload_Photo](https://raw.githubusercontent.com/Nabilah88/HijabMatch/master/frontend/src/assets/screenshots/upload_photo.gif)
+>>>>>>> 0060ae1 (Upadate README)
 
 ### Hijab Color Recommendations
 
 ![Color Recommendations](https://raw.githubusercontent.com/Nabilah88/HijabMatch/master/frontend/src/assets/screenshots/color_suggestions.gif)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0060ae1 (Upadate README)
 
 ### Hijab Recoloring Preview
 
 ![Hijab Recoloring](https://raw.githubusercontent.com/Nabilah88/HijabMatch/master/frontend/src/assets/screenshots/hijab_recoloring.gif)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0060ae1 (Upadate README)
 
 ## Technologies used
 
