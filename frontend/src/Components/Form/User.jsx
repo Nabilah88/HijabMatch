@@ -25,10 +25,11 @@ export default function User() {
   const formData = new FormData();
   formData.append("name", name);
   formData.append("image", file);
+  const API_URL = "https://hijabmatch-backend.onrender.com";
 
   try {
     const res = await fetch(
-      ""https://hijabmatch-backend.onrender.com/api/analyze/",
+      `${API_URL}/api/analyze/`,
       {
         method: "POST",
         body: formData,
