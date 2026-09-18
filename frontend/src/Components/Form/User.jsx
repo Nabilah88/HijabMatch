@@ -28,7 +28,7 @@ export default function User() {
 
   try {
     const res = await fetch(
-      "http://127.0.0.1:8000/api/analyze/",
+      ""https://hijabmatch-backend.onrender.com/api/analyze/",
       {
         method: "POST",
         body: formData,
