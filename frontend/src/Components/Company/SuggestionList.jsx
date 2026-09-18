@@ -1,6 +1,6 @@
 import { Box, Text, Anchor } from "grommet";
 import styled from "styled-components";
-import { searchData } from "./searchData";
+import { searchData } from "./SearchData";
 
 const SuggestionRow = styled(Box)`
   padding: 3px 0;
