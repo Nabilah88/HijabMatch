@@ -208,7 +208,7 @@ const HijabMatchResult = () => {
 
     setIsRecoloring(true);
     try {
-      const res = await fetch(`${API_BASE}/api/recolor-hijab/`, {
+      const res = await fetch(`${API_BASE}/api/recolor-swatches/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
