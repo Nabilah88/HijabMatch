@@ -27,7 +27,10 @@ export default function User() {
   formData.append("image", file);
   const API_URL = "https://hijabmatch-backend.onrender.com";
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c67bc37 (fixswatch recolor endpoint)
   try {
     const res = await fetch(
       `${API_URL}/api/analyze/`,

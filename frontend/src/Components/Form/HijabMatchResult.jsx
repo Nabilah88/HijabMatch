@@ -36,6 +36,8 @@ const GlassCard = ({ children, pad = "20px", ...rest }) => (
   </Box>
 );
 
+
+
 // Single swatch renderer used everywhere colors are shown
 const SwatchRow = ({ colors, swatchSize = "56px", shape = "small", onSwatchClick, selectedHex }) => (
   <Box direction="row" gap="10px" wrap justify="center">
