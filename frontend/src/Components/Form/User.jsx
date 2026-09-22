@@ -25,6 +25,7 @@ export default function User() {
   const formData = new FormData();
   formData.append("name", name);
   formData.append("image", file);
+  const API_URL = "https://hijabmatch-backend.onrender.com";
 
   const API_URL ="https://hijabmatch-backend.onrender.com"
 
