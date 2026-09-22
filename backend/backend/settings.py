@@ -13,6 +13,7 @@ from dec
 
 from pathlib import Path
 from decouple import config, Csv
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,9 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
+
 DEBUG = config("DEBUG", cast=bool)
-SECRET_KEY = config("DJANGO_SECRET_KEY")
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
+SECRET_KEY = config("DJANGO_SECRET_KEY", default=os.environ.get("DJANGO_SECRET_KEY"))
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS = [RENDER_EXTERNAL_HOSTNAME]
+else:
+  ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", cast=Csv())
 CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", cast=Csv())
 
@@ -45,6 +52,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware', 
     
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -125,6 +133,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 
 
@@ -149,3 +159,5 @@ CONTACT_RECIPIENT_EMAIL = config(
 )
 
 EMAIL_TIMEOUT = 10
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

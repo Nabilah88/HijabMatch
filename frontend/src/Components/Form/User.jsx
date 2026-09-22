@@ -26,9 +26,11 @@ export default function User() {
   formData.append("name", name);
   formData.append("image", file);
 
+  const API_URL ="https://hijabmatch-backend.onrender.com"
+
   try {
     const res = await fetch(
-      "http://127.0.0.1:8000/api/analyze/",
+      `${API_URL}/api/analyze/`,
       {
         method: "POST",
         body: formData,
