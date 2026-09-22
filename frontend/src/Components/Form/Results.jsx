@@ -18,7 +18,7 @@ import swatchIcon from "../../assets/swatch.svg"
 import crossIcon from  "../../assets/crosscircle.svg"
 
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://hijabmatch-backend.onrender.com";
 const FONT_FAMILY = "'Poppins', 'Segoe UI', sans-serif";
 
 // ---- Small shared pieces ----
