@@ -27,7 +27,6 @@ export default function User() {
   formData.append("image", file);
   const API_URL = "https://hijabmatch-backend.onrender.com";
 
-  const API_URL ="https://hijabmatch-backend.onrender.com"
 
   try {
     const res = await fetch(
