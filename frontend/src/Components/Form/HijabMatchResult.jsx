@@ -16,6 +16,17 @@ import { Refresh, MailOption, Download, Camera, Close, Checkmark } from "grommet
 const API_BASE = "https://hijabmatch-backend.onrender.com";
 const FONT_FAMILY = "'Poppins', 'Segoe UI', sans-serif";
 
+const getApiMediaUrl = (imageUrl) => {
+  if (!imageUrl) return null;
+
+  try {
+    const url = new URL(imageUrl, API_BASE);
+    return `${API_BASE}${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return null;
+  }
+};
+
 // ---- Small shared pieces ----
 
 const GlassCard = ({ children, pad = "20px", ...rest }) => (
@@ -164,7 +175,7 @@ const HijabMatchResult = () => {
 
   const [selectedSwatch, setSelectedSwatch] = useState(null);
   const [displayedPhotoUrl, setDisplayedPhotoUrl] = useState(
-    state?.image_url ? `${API_BASE}${state.image_url}` : null
+    getApiMediaUrl(state?.image_url)
   );
   const [isRecoloring, setIsRecoloring] = useState(false);
   const [recolorError, setRecolorError] = useState(null);
@@ -203,20 +214,23 @@ const HijabMatchResult = () => {
     setSelectedSwatch(color);
     setRecolorError(null);
 
-    if (!state?.analysis_id) {
-      setRecolorError("Missing analysis — try analyzing your photo again.");
+    if (!displayedPhotoUrl) {
+      setRecolorError("Your photo is no longer available. Please analyze it again.");
       return;
     }
 
     setIsRecoloring(true);
     try {
-      const res = await fetch(`${API_BASE}/api/recolor-swatches/`, {
+      const imageResponse = await fetch(displayedPhotoUrl);
+      if (!imageResponse.ok) throw new Error("Could not load the photo");
+
+      const formData = new FormData();
+      formData.append("image", await imageResponse.blob(), "photo.jpg");
+      formData.append("target_color", color.hex);
+
+      const res = await fetch(`${API_BASE}/api/recolor-hijab/`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          analysis_id: state.analysis_id,
-          target_color: color.hex,
-        }),
+        body: formData,
       });
       if (!res.ok) throw new Error("Recolor failed");
       const data = await res.json();
@@ -230,7 +244,7 @@ const HijabMatchResult = () => {
 
   const handleResetPhoto = () => {
     setSelectedSwatch(null);
-    setDisplayedPhotoUrl(state?.image_url ? `${API_BASE}${state.image_url}` : null);
+    setDisplayedPhotoUrl(getApiMediaUrl(state?.image_url));
     setRecolorError(null);
   };
 

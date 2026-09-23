@@ -107,7 +107,7 @@ const Contact = () => {
               setSuccess(null);
               try {
                 const API_BASE =
-                import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+                import.meta.env.VITE_API_BASE_URL || "https://hijabmatch-backend.onrender.com";
                 const res = await fetch(`${API_BASE}/api/contact/`, {
                  method: "POST",
                  headers: { "Content-Type": "application/json" },
