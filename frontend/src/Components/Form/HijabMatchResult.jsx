@@ -20,12 +20,14 @@ const getApiMediaUrl = (imageUrl) => {
   if (!imageUrl) return null;
 
   try {
-    const url = new URL(imageUrl, API_BASE);
-    return `${API_BASE}${url.pathname}${url.search}${url.hash}`;
+    // Remove any existing host (localhost or Render)
+    const cleaned = imageUrl.replace(/^https?:\/\/[^/]+/, "");
+    return `${API_BASE}${cleaned}`;
   } catch {
     return null;
   }
 };
+
 
 // ---- Small shared pieces ----
 
