@@ -16,19 +16,6 @@ import { Refresh, MailOption, Download, Camera, Close, Checkmark } from "grommet
 const API_BASE = "https://hijabmatch-backend.onrender.com";
 const FONT_FAMILY = "'Poppins', 'Segoe UI', sans-serif";
 
-const getApiMediaUrl = (imageUrl) => {
-  if (!imageUrl) return null;
-
-  try {
-    // Remove any existing host (localhost or Render)
-    const cleaned = imageUrl.replace(/^https?:\/\/[^/]+/, "");
-    return `${API_BASE}${cleaned}`;
-  } catch {
-    return null;
-  }
-};
-
-
 // ---- Small shared pieces ----
 
 const GlassCard = ({ children, pad = "20px", ...rest }) => (
@@ -49,9 +36,9 @@ const GlassCard = ({ children, pad = "20px", ...rest }) => (
   </Box>
 );
 
-
-
-// Single swatch renderer used everywhere colors are shown
+// Single swatch renderer used everywhere colors are shown.
+// Pass onSwatchClick + selectedHex to make a row clickable/interactive;
+// omit them to render a plain, non-interactive row of color chips.
 const SwatchRow = ({ colors, swatchSize = "56px", shape = "small", onSwatchClick, selectedHex }) => (
   <Box direction="row" gap="10px" wrap justify="center">
     {(colors || []).map((color) => {
@@ -176,8 +163,13 @@ const HijabMatchResult = () => {
   const [emailError, setEmailError] = useState(null);
 
   const [selectedSwatch, setSelectedSwatch] = useState(null);
+
+  // The backend never returns a URL for the originally uploaded photo —
+  // Form.js only passes the raw File object through router state as
+  // `imageFile`. So the displayed photo is a local object URL built from
+  // that file, not a server-hosted path.
   const [displayedPhotoUrl, setDisplayedPhotoUrl] = useState(
-    getApiMediaUrl(state?.image_url)
+    state?.imageFile ? URL.createObjectURL(state.imageFile) : null
   );
   const [isRecoloring, setIsRecoloring] = useState(false);
   const [recolorError, setRecolorError] = useState(null);
@@ -212,6 +204,11 @@ const HijabMatchResult = () => {
   };
 
   // ---- Recolor ----
+  // Shared by every clickable SwatchRow (Your Best Colors, Colors That
+  // Overpower You, Colors That Enhance You) — clicking any color anywhere
+  // sends the currently displayed photo + that hex to the backend and
+  // swaps in the recolored result, which updates the photo everywhere
+  // it's shown since they all read the same displayedPhotoUrl state.
   const handleSwatchClick = async (color) => {
     setSelectedSwatch(color);
     setRecolorError(null);
@@ -246,7 +243,7 @@ const HijabMatchResult = () => {
 
   const handleResetPhoto = () => {
     setSelectedSwatch(null);
-    setDisplayedPhotoUrl(getApiMediaUrl(state?.image_url));
+    setDisplayedPhotoUrl(state?.imageFile ? URL.createObjectURL(state.imageFile) : null);
     setRecolorError(null);
   };
 
@@ -490,7 +487,12 @@ const HijabMatchResult = () => {
               maxHeight={heroImgMaxHeight}
               alt="Your image swatches with overpowering colors"
             />
-            <SwatchRow colors={state?.avoid_colors} swatchSize={isSmall ? "40px" : "48px"} />
+            <SwatchRow
+              colors={state?.avoid_colors}
+              swatchSize={isSmall ? "40px" : "48px"}
+              onSwatchClick={handleSwatchClick}
+              selectedHex={selectedSwatch?.hex}
+            />
             <Text size="11px" color="rgba(255,255,255,0.75)" style={{ fontFamily: FONT_FAMILY, lineHeight: 1.4 }}>
               These colors can wash you out and make you look dull or tired.
             </Text>
@@ -506,7 +508,12 @@ const HijabMatchResult = () => {
               maxHeight={heroImgMaxHeight}
               alt="Your image swatches with enhancing colors"
             />
-            <SwatchRow colors={state?.recommended_colors?.slice(0, 4)} swatchSize={isSmall ? "40px" : "48px"} />
+            <SwatchRow
+              colors={state?.recommended_colors?.slice(0, 4)}
+              swatchSize={isSmall ? "40px" : "48px"}
+              onSwatchClick={handleSwatchClick}
+              selectedHex={selectedSwatch?.hex}
+            />
             <Text size="11px" color="rgba(255,255,255,0.75)" style={{ fontFamily: FONT_FAMILY, lineHeight: 1.4 }}>
               These colors brighten your face and bring out your natural glow.
             </Text>

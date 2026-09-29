@@ -5,6 +5,7 @@ import CameraScreen from "./CameraScreen";
 import { useNavigate } from "react-router-dom";
 import hijabIcon from "../../assets/form_icon.png";
 
+
 export default function User() {
   const navigate = useNavigate();
 
